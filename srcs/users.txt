@@ -1,0 +1,5 @@
+ssh			user|password       ssh user@IP et mdp password
+ftps		user|password
+grafana		admin|admin
+phpmyadmiin root|root
+wordpress	root|root

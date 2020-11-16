@@ -1,0 +1,112 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftps
+  labels:
+    app: ftps
+spec:
+  selector:
+    app: ftps
+    tier: ftps
+  type: LoadBalancer
+  ports:
+    - name: ftps
+      protocol: TCP
+      port: 21
+      targetPort: 21
+    - name: ftps-data
+      protocol: TCP
+      port: 21100
+      targetPort: 21100
+    - name: ftps-data2
+      protocol: TCP
+      port: 21101
+      targetPort: 21101
+    - name: ftps-data3
+      protocol: TCP
+      port: 21102
+      targetPort: 21102
+    - name: ftps-data4
+      protocol: TCP
+      port: 21103
+      targetPort: 21103
+    - name: ftps-data5
+      protocol: TCP
+      port: 21104
+      targetPort: 21104
+    - name: ftps-data6
+      protocol: TCP
+      port: 21105
+      targetPort: 21105
+    - name: ftps-data7
+      protocol: TCP
+      port: 21106
+      targetPort: 21106
+    - name: ftps-data8
+      protocol: TCP
+      port: 21107
+      targetPort: 21107
+    - name: ftps-data9
+      protocol: TCP
+      port: 21108
+      targetPort: 21108
+    - name: ftps-data10
+      protocol: TCP
+      port: 21109
+      targetPort: 21109
+  loadBalancerIP: 192.168.99.113
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps
+  # labels so that we can bind a Service to this Pod
+  labels:
+    app: ftps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ftps
+      tier: ftps
+  template:
+    metadata:
+      labels:
+        app: ftps
+        tier: ftps
+    spec:
+      containers:
+      - name: ftps
+        image: ftps_i
+        imagePullPolicy: Never
+        #        livenessProbe:
+        #          tcpSocket:
+        #            port: 21
+        #          initialDelaySeconds: 4
+        #          periodSeconds: 4
+       ports:
+          - containerPort: 21
+            name: ftps
+          - name: ftps-data
+            containerPort: 21100
+          - name: ftps-data2
+            containerPort: 21101
+          - name: ftps-data3
+            containerPort: 21102
+          - name: ftps-data4
+            containerPort: 21103
+          - name: ftps-data5
+            containerPort: 21104
+          - name: ftps-data6
+            containerPort: 21105
+          - name: ftps-data7
+            containerPort: 21106
+          - name: ftps-data8
+            containerPort: 21107
+          - name: ftps-data9
+            containerPort: 21108
+          - name: ftps-data10
+            containerPort: 21109

@@ -1,0 +1,1 @@
+user|password grafana = admin|admin
